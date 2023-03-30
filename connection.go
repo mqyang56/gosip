@@ -19,7 +19,7 @@ type Packet struct {
 }
 
 func newPacket(data []byte, raddr net.Addr) Packet {
-	logrus.Traceln("receive new packet,from:", raddr.String(), string(data))
+	//logrus.Traceln("receive new packet,from:", raddr.String(), string(data))
 	return Packet{
 		reader:     bufio.NewReader(bytes.NewReader(data)),
 		raddr:      raddr,
