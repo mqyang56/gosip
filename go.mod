@@ -1,4 +1,4 @@
-module github.com/mqyang56/gosip
+module github.com/panjjo/gosip
 
 go 1.19
 
