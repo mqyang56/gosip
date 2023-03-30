@@ -107,7 +107,7 @@ func (conn *connection) ReadFrom(buf []byte) (num int, raddr net.Addr, err error
 	if err != nil {
 		return num, raddr, NewError(err, conn.logKey, "readfrom", conn.baseConn.LocalAddr().String(), raddr.String())
 	}
-	logrus.Tracef("readFrom %d , %s -> %s \n %s", num, raddr, conn.LocalAddr(), string(buf[:num]))
+	//logrus.Tracef("readFrom %d , %s -> %s \n %s", num, raddr, conn.LocalAddr(), string(buf[:num]))
 	return num, raddr, err
 }
 

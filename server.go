@@ -148,9 +148,13 @@ func (s *Server) Request(req *Request, host string, port int) (*Transaction, err
 
 	if host == "" {
 		viaHop.Host = s.host.String()
+	} else {
+		viaHop.Host = host
 	}
 	if port == 0 {
 		viaHop.Port = s.port
+	} else {
+		viaHop.Port = NewPort(port)
 	}
 	if viaHop.Params == nil {
 		viaHop.Params = NewParams().Add("branch", String{Str: GenerateBranch()})
