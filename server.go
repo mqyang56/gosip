@@ -140,13 +140,18 @@ func (s *Server) handlerResponse(msg *Response) {
 }
 
 // Request Request
-func (s *Server) Request(req *Request) (*Transaction, error) {
+func (s *Server) Request(req *Request, host string, port int) (*Transaction, error) {
 	viaHop, ok := req.ViaHop()
 	if !ok {
 		return nil, fmt.Errorf("missing required 'Via' header")
 	}
-	viaHop.Host = s.host.String()
-	viaHop.Port = s.port
+
+	if host == "" {
+		viaHop.Host = s.host.String()
+	}
+	if port == 0 {
+		viaHop.Port = s.port
+	}
 	if viaHop.Params == nil {
 		viaHop.Params = NewParams().Add("branch", String{Str: GenerateBranch()})
 	}
