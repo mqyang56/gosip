@@ -113,7 +113,10 @@ func (s *Server) handlerListen(msgs chan Message) {
 }
 func (s *Server) handlerRequest(msg *Request) {
 	tx := s.mustTX(getTXKey(msg))
-	logrus.Traceln("receive request from:", msg.Source(), ",method:", msg.Method(), "txKey:", tx.key, "message: \n", msg.String())
+	if msg.Method() != INVITE {
+		logrus.Traceln("receive request from:", msg.Source(), ",method:", msg.Method(), "txKey:", tx.key, "message: \n", msg.String())
+	}
+
 	s.hmu.RLock()
 	handler, ok := s.requestHandlers[msg.Method()]
 	s.hmu.RUnlock()
